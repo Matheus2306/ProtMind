@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<ProjetoBackend.Models.Categoria>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categoria";
 }
 
-<h1>Index</h1>
+<h2>Categoria de Produto</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <div class="btn btn-lg" style="background: #DC5F00">
+        <a asp-action="Create" class="text-light text-decoration-none">Criar</a>
+    </div>
 </p>
-<table class="table">
+<table class="table table-responsive table-striped table-dark">
     <thead>
         <tr>
             <th>
@@ -19,17 +21,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    <div class="btn btn-outline-primary">
+                        <a asp-action="Edit" asp-route-id="@item.CategoriaId" class="text-primary text-decoration-none">Editar</a>
+                    </div>
+                    |
+                    <div class="btn btn-outline-danger">
+                        <a asp-action="Delete" asp-route-id="@item.CategoriaId" class="text-danger text-decoration-none">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
