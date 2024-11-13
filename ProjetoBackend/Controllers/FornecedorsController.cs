@@ -10,24 +10,23 @@ using ProjetoBackend.Models;
 
 namespace ProjetoBackend.Controllers
 {
-    public class FornecedoresController : Controller
+    public class FornecedorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public FornecedoresController(ApplicationDbContext context)
+        public FornecedorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Fornecedores
+        // GET: Fornecedors
         public async Task<IActionResult> Index()
         {
-            var fornecedores = await _context.Fornecedores.ToListAsync();
-            return View(fornecedores.OrderBy(f => f.Nome));
+            return View(await _context.Fornecedores.ToListAsync());
         }
 
-        // GET: Fornecedores/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Fornecedors/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -44,13 +43,13 @@ namespace ProjetoBackend.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Create
+        // GET: Fornecedors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Fornecedores/Create
+        // POST: Fornecedors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,6 +58,7 @@ namespace ProjetoBackend.Controllers
         {
             if (ModelState.IsValid)
             {
+                fornecedor.FornecedorId = Guid.NewGuid();
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,8 +66,8 @@ namespace ProjetoBackend.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Fornecedors/Edit/5
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -82,12 +82,12 @@ namespace ProjetoBackend.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Edit/5
+        // POST: Fornecedors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FornecedorId,Nome,Email,Celular,CnpjCpf")] Fornecedor fornecedor)
+        public async Task<IActionResult> Edit(Guid id, [Bind("FornecedorId,Nome,Email,Celular,CnpjCpf")] Fornecedor fornecedor)
         {
             if (id != fornecedor.FornecedorId)
             {
@@ -117,8 +117,8 @@ namespace ProjetoBackend.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Fornecedors/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -135,10 +135,10 @@ namespace ProjetoBackend.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Delete/5
+        // POST: Fornecedors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var fornecedor = await _context.Fornecedores.FindAsync(id);
             if (fornecedor != null)
@@ -150,7 +150,7 @@ namespace ProjetoBackend.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FornecedorExists(int id)
+        private bool FornecedorExists(Guid id)
         {
             return _context.Fornecedores.Any(e => e.FornecedorId == id);
         }
