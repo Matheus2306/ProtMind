@@ -70,7 +70,14 @@
                     @Html.DisplayFor(modelItem => item.DataCadastro)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CadastroAtivo)
+                    @if (item.CadastroAtivo == true)
+                    {
+                        <span>Sim</span>
+                    }
+                    else
+                    {
+                        <span>Não</span>
+                    }
                 </td>
                 <td>
                     <div class="btn btn-outline-primary">
@@ -78,7 +85,7 @@
                     </div>
                     |
                     <div class="btn btn-outline-danger">
-                        <a asp-action="Delete" asp-route-id="@item.ClienteId" class="text-decoration-none text-danger">Deletar</a>
+                        <a asp-action="Delete" asp-route-id="@item.ClienteId" class="   ">Deletar</a>
                     </div>
                 </td>
             </tr>
