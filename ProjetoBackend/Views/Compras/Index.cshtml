@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<ProjetoBackend.Models.Compra>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Compras";
 }
 
-<h1>Index</h1>
+<h1>Compras</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-lg text-light" style="background: #DC5F00">Cadastrar</a>
 </p>
-<table class="table">
+<table class="table table-responsive table-dark table-striped">
     <thead>
         <tr>
             <th>
@@ -25,23 +25,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fornecedor.Celular)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCompra)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorTotal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CompraId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CompraId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CompraId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fornecedor.Celular)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotal)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CompraId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CompraId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CompraId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
