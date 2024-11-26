@@ -62,6 +62,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-md mt-2">
+                    <label asp-for="CadastroAtivo" class="form-label fw-bold text-white">Ativo</label>
+                    <select asp-for="CadastroAtivo" class="form-control" asp-items="ViewBag.Ativo"></select>
+                    <span asp-validation-for="CadastroAtivo" class="text-danger"></span>
                 </div>
             </div>
             <div class="row">

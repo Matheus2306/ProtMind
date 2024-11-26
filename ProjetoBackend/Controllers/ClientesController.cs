@@ -95,6 +95,11 @@ namespace ProjetoBackend.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Ativo = new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Ativo", Value = "true" },
+                new SelectListItem { Text = "Inativo", Value = "false" }
+            };
             return View(cliente);
         }
 
