@@ -12,8 +12,8 @@ using ProjetoBackend.Data;
 namespace ProjetoBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241113173444_test")]
-    partial class test
+    [Migration("20241127133045_TEST")]
+    partial class TEST
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -398,8 +398,8 @@ namespace ProjetoBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Preco")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProdutoId");
 
@@ -418,8 +418,8 @@ namespace ProjetoBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ValorServico")
-                        .HasColumnType("float");
+                    b.Property<decimal>("ValorServico")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ServicoId");
 

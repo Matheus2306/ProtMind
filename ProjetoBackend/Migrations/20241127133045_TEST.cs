@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjetoBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class TEST : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,7 +101,7 @@ namespace ProjetoBackend.Migrations
                 {
                     ServicoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ValorServico = table.Column<double>(type: "float", nullable: false)
+                    ValorServico = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,7 +220,7 @@ namespace ProjetoBackend.Migrations
                 {
                     ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Preco = table.Column<double>(type: "float", nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Estoque = table.Column<double>(type: "float", nullable: false),
                     CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },

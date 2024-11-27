@@ -395,8 +395,8 @@ namespace ProjetoBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Preco")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProdutoId");
 
@@ -415,8 +415,8 @@ namespace ProjetoBackend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ValorServico")
-                        .HasColumnType("float");
+                    b.Property<decimal>("ValorServico")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ServicoId");
 
