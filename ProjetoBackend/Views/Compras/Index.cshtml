@@ -3,45 +3,47 @@
 @{
     ViewData["Title"] = "Compras";
 }
+<div class="container">
 
-<h1>Compras</h1>
+    <h1>Compras</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-lg text-light btn-1">Cadastrar</a>
-</p>
-<table class="table table-responsive table-dark table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fornecedor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCompra)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorTotal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-action="Create" class="btn btn-lg text-light btn-1">Cadastrar</a>
+    </p>
+    <table class="table table-responsive table-dark table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataCompra)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValorTotal)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-primary">Editar</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-danger">Deletar</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fornecedor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataCompra)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorTotal)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCompra)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-primary">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-danger">Deletar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
