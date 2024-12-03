@@ -3,58 +3,57 @@
 @{
     ViewData["Title"] = "Deletar";
 }
+<div class="container">
 
-<h3>Deletar</h3>
-<div>
-    <h4>Venda</h4>
-    <hr />
-    <dl class="row">
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.NotaFiscal)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.NotaFiscal)
-            </dd>
-        </div>
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.Cliente)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.Cliente.Celular)
-            </dd>
-        </div>
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.DataVenda)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.DataVenda)
-            </dd>
-        </div>
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.ValorTotal)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.ValorTotal)
-            </dd>
-        </div>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="VendaId" />
-        <div class="row">
-            <div class="col-12 col-md mt-2">
-                <input type="submit" value="Deletar" class="btn btn-danger w-100" />
+    <h3>Deletar</h3>
+    <div>
+        <hr />
+        <dl class="row">
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.NotaFiscal)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.NotaFiscal)
+                </dd>
             </div>
-            <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
-            <div class="col-12 col-md mt-2">
-                <div class="btn btn-primary w-100">
-                    <a asp-action="Index" class="text-decoration-none text-light">Voltar</a>
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.Cliente)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.Cliente.Celular)
+                </dd>
+            </div>
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.DataVenda)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.DataVenda)
+                </dd>
+            </div>
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.ValorTotal)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.ValorTotal)
+                </dd>
+            </div>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="VendaId" />
+            <div class="row">
+                <div class="col-12 col-md mt-2">
+                    <input type="submit" value="Deletar" class="btn btn-danger w-100" />
+                </div>
+                <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
+                <div class="col-12 col-md mt-2">
+                    <a asp-action="Index" class="text-decoration-none text-light btn btn-primary w-100">Voltar</a>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
