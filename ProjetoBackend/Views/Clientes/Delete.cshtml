@@ -81,7 +81,15 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ClienteId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <div class="row">
+
+            <div class="col-12 col-md mt-2">
+                <input type="submit" value="Delete" class="btn btn-danger w-100" />
+            </div>
+            <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
+            <div class="col col-md mt-2">
+                <a asp-action="Index" class="text-decoration-none text-light btn btn-primary w-100">voltar</a>
+            </div>
+        </div>
     </form>
 </div>

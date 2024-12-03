@@ -3,44 +3,43 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="container">
 
-<h1>Edit</h1>
+    <h1>Edit</h1>
 
-<h4>Categoria</h4>
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CategoriaId" />
-            <div class="row">
-                <div class="col-12 col-md-12 mt-2">
-                    <div class="form-group">
-                        <label asp-for="Nome" class="control-label"></label>
-                        <input asp-for="Nome" class="form-control" />
-                        <span asp-validation-for="Nome" class="text-danger"></span>
+    <h4>Categoria</h4>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CategoriaId" />
+                <div class="row">
+                    <div class="col-12 col-md-12 mt-2">
+                        <div class="form-group">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md mt-2">
-                    <div class="btn btn-outline-danger w-100">
-                        <a asp-action="Index" class="text-danger text-decoration-none">Cancelar</a>
+                <div class="row">
+                    <div class="col-12 col-md mt-2">
+                        <a asp-action="Index" class="text-danger text-decoration-none btn btn-outline-danger w-100">Cancelar</a>
+                    </div>
+                    <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
+                    <div class="col-12 col-md mt-2">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-outline-primary w-100" />
+                        </div>
                     </div>
                 </div>
-                <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
-                <div class="col-12 col-md mt-2">
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-outline-primary w-100" />
-                    </div>
-                </div>
-            </div>
-            <!--
-            -->
-        </form>
+                <!--
+                -->
+            </form>
+        </div>
     </div>
 </div>
-
 
 
 @section Scripts {

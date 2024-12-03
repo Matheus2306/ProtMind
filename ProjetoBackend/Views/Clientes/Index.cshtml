@@ -80,13 +80,9 @@
                     }
                 </td>
                 <td>
-                    <div class="btn btn-outline-primary">
-                        <a asp-action="Edit" asp-route-id="@item.ClienteId" class="text-decoration-none text-primary">Editar</a>
-                    </div>
+                    <a asp-action="Edit" asp-route-id="@item.ClienteId" class="text-decoration-none text-primary btn btn-outline-primary">Editar</a>
                     |
-                    <div class="btn btn-outline-danger">
-                        <a asp-action="Delete" asp-route-id="@item.ClienteId" class="text-danger text-decoration-none ">Deletar</a>
-                    </div>
+                    <a asp-action="Delete" asp-route-id="@item.ClienteId" class="text-danger text-decoration-none btn btn-outline-danger">Deletar</a>
                 </td>
             </tr>
         }

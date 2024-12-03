@@ -12,10 +12,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
-                <div class="col-12 col-md-6 mt-2">
+                <div class="col-12 col-md-8 mt2">
                     <div class="form-group">
                         <label asp-for="ClienteId" class="control-label"></label>
                         <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                        <span asp-validation-for="ClienteId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-12 col-md mt-2">
@@ -37,13 +38,18 @@
                 <input type="hidden" asp-for="DataVenda" class="form-control" />
 
             </div>
-
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
-            </div>
-
-            <div>
-                <a asp-action="Index">Voltar</a>
+            <div class="row">
+                <div class="col-12 col-md mt-2">
+                    <div class="btn btn-outline-danger w-100">
+                        <a asp-action="Index" class="text-danger text-decoration-none">Cancelar</a>
+                    </div>
+                </div>
+                <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
+                <div class="col-12 col-md mt-2">
+                    <div class="form-group">
+                        <input type="submit" value="Criar" class="btn btn-primary w-100" />
+                    </div>
+                </div>
             </div>
         </form>
     </div>
