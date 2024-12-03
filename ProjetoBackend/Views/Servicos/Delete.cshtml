@@ -3,44 +3,44 @@
 @{
     ViewData["Title"] = "Deletar Serviços";
 }
+<div class="container">
 
-<h3>Deletar</h3>
+    <h3>Deletar</h3>
 
-<div>
-    <h4>Servico</h4>
-    <hr />
-    <dl class="row">
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
-        </div>
-        <div class="row justify-content-evenly">
-            <dt class="col-12 col-md-2">
-                @Html.DisplayNameFor(model => model.ValorServico)
-            </dt>
-            <dd class="col-12 col-md-2">
-                @Html.DisplayFor(model => model.ValorServico)
-            </dd>
-        </div>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ServicoId" />
-        <div class="row">
-
-            <div class="col-12 col-md mt-2">
-                <input type="submit" value="Delete" class="btn btn-danger w-100" />
+    <div>
+        <h4>Servico</h4>
+        <hr />
+        <dl class="row">
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
             </div>
-            <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
-            <div class="col col-md mt-2">
-                <div class="btn btn-primary w-100">
-                    <a asp-action="Index" class="text-decoration-none text-light">voltar</a>
+            <div class="row justify-content-evenly">
+                <dt class="col-12 col-md-2">
+                    @Html.DisplayNameFor(model => model.ValorServico)
+                </dt>
+                <dd class="col-12 col-md-2">
+                    @Html.DisplayFor(model => model.ValorServico)
+                </dd>
+            </div>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ServicoId" />
+            <div class="row">
+
+                <div class="col-12 col-md mt-2">
+                    <input type="submit" value="Delete" class="btn btn-danger w-100" />
+                </div>
+                <div class="d-sm-none d-md-block col-md-3 mt-2"></div>
+                <div class="col col-md mt-2">
+                    <a asp-action="Index" class="text-decoration-none text-light btn btn-primary w-100">voltar</a>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
