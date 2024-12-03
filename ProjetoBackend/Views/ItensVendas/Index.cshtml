@@ -1,66 +1,62 @@
 ﻿@model IEnumerable<ProjetoBackend.Models.ItemVenda>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Itens da Venda";
     var idVendaAtual = ViewData["idVendaAtual"];
 }
+<div class="container">
 
-<h1>Vendas</h1>
+    <h1>Vendas</h1>
 
-<p>
-    <div class="btn btn-lg" style=" background:#DC5F00">
-        <a asp-action="Create" class="text-decoration-none text-light">Cadastrar</a>
-    </div>
-</p>
-<table class="table table-dark table-responsive">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Venda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Produto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorUnitario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ValorTotal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a asp-action="Create" class="text-decoration-none text-light btn btn-lg btn-1">Cadastrar</a>
+    </p>
+    <table class="table table-dark table-responsive">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Venda.VendaId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Produto.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValorUnitario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValorTotal)
-                </td>
-                <td>
-                    <div class=" btn btn-outline-primary">
-                        <a asp-action="Edit" asp-route-id="@item.ItemVendaId" class="text-primary text-decoration-none">Editar</a>
-                    </div>
-                    <div class="btn btn-outline-danger">
-                        <a asp-action="Delete" asp-route-id="@item.ItemVendaId" class="text-danger text-decoration-none">Delete</a>
-                    </div>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Venda)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Produto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorUnitario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ValorTotal)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Venda.VendaId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorUnitario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ItemVendaId" class="text-primary text-decoration-none btn btn-outline-primary">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.ItemVendaId" class="text-danger text-decoration-none btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
