@@ -25,6 +25,10 @@ body {
     background: #DC5F00
 }
 
-btn-2 {
+.btn-2 {
     background: #808080
+}
+
+.max {
+    max-width: 400px
 }
