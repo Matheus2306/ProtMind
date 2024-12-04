@@ -2,23 +2,34 @@
 
 @{
     ViewData["Title"] = "Criar";
+    var estoque = ViewData["estoque"].ToString();
 }
 <div class="container">
 
-    <h1>Item da Venda</h1>
+    <h1>Produtos da Venda</h1>
+
+    @if (estoque != "-200")
+    {
+        <div class="container alert-danger">
+            <p></p>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Quantidade em Estoque Insuficiente! Quantidade Atual:  <strong>@estoque</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    }
 
     <hr />
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form asp-action="Create">
+            <form asp-action="Create" asp-route-id=@ViewData["VendaId"]>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label asp-for="VendaId" class="control-label"></label>
-                            <input asp-for="VendaId" class="form-control" value=@ViewData["VendaId"] />
-                        </div>
-                    </div>
+
+
+                    <input asp-for="VendaId" type="hidden" class="form-control" value=@ViewData["VendaId"] />
+
                     <div class="col-12 col-md-3">
                         <div class="form-group">
                             <label asp-for="Quantidade" class="control-label"></label>
@@ -29,7 +40,9 @@
                     <div class="col-12 col-md">
                         <div class="form-group">
                             <label asp-for="ProdutoId" class="control-label"></label>
-                            <select asp-for="ProdutoId" class="form-control" asp-items="ViewBag.ProdutoId" id="produtoId"></select>
+                            <select asp-for="ProdutoId" class="form-control" asp-items="ViewBag.ProdutoId" id="produtoId">
+                                <option>Selecione um Produto</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -76,3 +89,24 @@
 
     }
 }
+
+<script>
+    function limparFormulario() {
+        // Limpar o campo de entrada "Quantidade"
+        document.getElementById("Quantidade").value = "";
+
+        // Resetar o campo de seleção "ProdutoId" para a opção padrão
+        document.getElementById("produtoId").selectedIndex = 0;
+
+        // Limpar o campo de entrada "ValorUnitario"
+        document.getElementById("ValorUnitario").value = "";
+
+        // Limpar o campo de entrada "ValorTotal"
+        document.getElementById("ValorTotal").value = "";
+    }
+
+    // Executar a função no carregamento da página
+    window.onload = function () {
+        limparFormulario();
+    };
+</script>

@@ -25,6 +25,7 @@ namespace ProjetoBackend.Controllers
             var listaItens = await _context.ItensVenda.Include(i => i.Produto).Include(i => i.Venda).ToListAsync();
             listaItens = listaItens.Where(i => i.VendaId == id).ToList();
             ViewData["idVendaAtual"] = id;
+            ViewData["estoque"] = 0;
             return View("Index", listaItens);
         }
 
@@ -49,10 +50,18 @@ namespace ProjetoBackend.Controllers
         }
 
         // GET: ItensVendas/Create
-        public IActionResult Create(Guid? id)
+        public IActionResult Create(Guid? id, string? estoque)
         {
             ViewData["ProdutoId"] = new SelectList(_context.Produtos, "ProdutoId", "Nome");
             ViewData["VendaId"] = id;
+            if (estoque != null)
+            {
+                ViewData["estoque"] = estoque;
+            }
+            else
+            {
+                ViewData["estoque"] = "-200";
+            }
             return View();
         }
 
@@ -61,34 +70,57 @@ namespace ProjetoBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemVendaId,VendaId,ProdutoId,Quantidade,ValorUnitario,ValorTotal")] ItemVenda itemVenda)
+        public async Task<IActionResult> Create([Bind("ItemVendaId,VendaId,ProdutoId,Quantidade,ValorUnitario,ValorTotal")] ItemVenda itemVenda, Guid? id)
         {
             if (ModelState.IsValid)
             {
-                itemVenda.ItemVendaId = Guid.NewGuid();
-                _context.Add(itemVenda);
-                await _context.SaveChangesAsync();
-                //Selecionar todos os itens dessa venda e somar o valor total, e atualizar o valor total da venda
+                ViewData["idVendaAtual"] = itemVenda.VendaId;
 
-                // lista de itens da venda
-                var listaItens = await _context.ItensVenda.Include(i => i.Produto).Include(i => i.Venda).Where(v => v.VendaId == itemVenda.VendaId).ToListAsync();
 
-                // Calcular o valor total da venda
-                var valorTotalVenda = listaItens.Sum(i => i.ValorTotal);
+                //Recuperar a Quantidade em estoque
+                var produto = _context.Produtos.FindAsync(itemVenda.ProdutoId).Result;
+                var qtdAtual = produto.Estoque;
+                ViewData["estoque"] = qtdAtual;
+                if (qtdAtual >= itemVenda.Quantidade)
+                {
+                    itemVenda.ItemVendaId = Guid.NewGuid();
+                    _context.Add(itemVenda);
+                    await _context.SaveChangesAsync();
+                    //Selecionar todos os itens dessa venda e somar o valor total, e atualizar o valor total da venda
 
-                // Atualizar o valor total da venda correspondente
-                var venda = await _context.Vendas.FindAsync(itemVenda.VendaId);
-                venda.ValorTotal = valorTotalVenda;
+                    // lista de itens da venda
+                    var listaItens = await _context.ItensVenda.Include(i => i.Produto).Include(i => i.Venda).Where(v => v.VendaId == itemVenda.VendaId).ToListAsync();
 
-                // Salvar mudança no banco de dados
-                await _context.SaveChangesAsync();
+                    // Calcular o valor total da venda
+                    var valorTotalVenda = listaItens.Sum(i => i.ValorTotal);
 
-                return View("Index", listaItens);
+                    // Atualizar o valor total da venda correspondente
+                    var venda = await _context.Vendas.FindAsync(itemVenda.VendaId);
+                    venda.ValorTotal = valorTotalVenda;
+
+                    // Salvar mudança no banco de dados
+                    await _context.SaveChangesAsync();
+
+                    // atualizar no banco de dados o estoque
+                    produto.Estoque -= itemVenda.Quantidade;
+
+                    _context.Produtos.Update(produto);
+                    await _context.SaveChangesAsync();
+                    ViewData["estoque"] = "-200";
+                    return View("Index", listaItens);
+                }
+                else
+                {
+                    ViewData["ProdutoId"] = new SelectList(_context.Produtos, "ProdutoId", "Nome", itemVenda.ProdutoId);
+                    ViewData["VendaId"] = new SelectList(_context.Vendas, "VendaId", "NotaFiscal", itemVenda.VendaId);
+                    return RedirectToAction("Create", new { id = itemVenda.VendaId, estoque = qtdAtual.ToString() });
+                }
 
             }
             ViewData["ProdutoId"] = new SelectList(_context.Produtos, "ProdutoId", "Nome", itemVenda.ProdutoId);
-            ViewData["VendaId"] = new SelectList(_context.Vendas, "VendaId", "NotaFiscal", itemVenda.VendaId);
-            return View(itemVenda);
+            ViewData["VendaId"] = id;
+            ViewData["estoque"] = "-200";
+            return RedirectToAction("Create", new { id = itemVenda.VendaId });
         }
 
         // GET: ItensVendas/Edit/5
