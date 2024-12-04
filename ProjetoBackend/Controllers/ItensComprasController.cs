@@ -20,10 +20,14 @@ namespace ProjetoBackend.Controllers
         }
 
         // GET: ItensCompras
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid? id)
         {
-            var applicationDbContext = _context.ItensCompra.Include(i => i.Compra).Include(i => i.Produto);
-            return View(await applicationDbContext.ToListAsync());
+            var listaItens = await _context.ItensCompra.Include(i => i.Compra).Include(i => i.Produto).ToListAsync();
+            listaItens = listaItens.Where(c => c.CompraId == id).ToList();
+            ViewData["idCompraAtual"] = id;
+            ViewData["estoque"] = 0;
+            return View("Index", listaItens);
+
         }
 
         // GET: ItensCompras/Details/5
@@ -47,10 +51,18 @@ namespace ProjetoBackend.Controllers
         }
 
         // GET: ItensCompras/Create
-        public IActionResult Create()
+        public IActionResult Create(Guid? id, string? estoque)
         {
-            ViewData["CompraId"] = new SelectList(_context.Compras, "CompraId", "CompraId");
+            ViewData["idCompraAtual"] = id;
             ViewData["ProdutoId"] = new SelectList(_context.Produtos, "ProdutoId", "Nome");
+            if (estoque != null)
+            {
+                ViewData["estoque"] = estoque;
+            }
+            else
+            {
+                ViewData["estoque"] = "-200";
+            }
             return View();
         }
 
@@ -59,19 +71,31 @@ namespace ProjetoBackend.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemCompraId,CompraId,ProdutoId,Quantidade")] ItemCompra itemCompra)
+        public async Task<IActionResult> Create([Bind("ItemCompraId,CompraId,ProdutoId,Quantidade")] ItemCompra itemCompra, Guid? id)
         {
             if (ModelState.IsValid)
             {
+                ViewData["idCompraAtual"] = itemCompra.CompraId;
+                var produto = _context.Produtos.FindAsync(itemCompra.ProdutoId).Result;
+                var qtdAtual = produto.Estoque;
+                ViewData["estoque"] = qtdAtual;
                 itemCompra.ItemCompraId = Guid.NewGuid();
                 _context.Add(itemCompra);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                produto.Estoque += itemCompra.Quantidade;
+                _context.Produtos.Update(produto);
+                await _context.SaveChangesAsync();
+                ViewData["estoque"] = "-200";
+                return RedirectToAction(nameof(Index), new { id = id });
+
             }
-            ViewData["CompraId"] = new SelectList(_context.Compras, "CompraId", "CompraId", itemCompra.CompraId);
+
             ViewData["ProdutoId"] = new SelectList(_context.Produtos, "ProdutoId", "Nome", itemCompra.ProdutoId);
-            return View(itemCompra);
+            ViewData["idCompraAtual"] = id;
+            ViewData["estoque"] = "-200";
+            return RedirectToAction("Create", new { id = itemCompra.CompraId });
         }
+
 
         // GET: ItensCompras/Edit/5
         public async Task<IActionResult> Edit(Guid? id)

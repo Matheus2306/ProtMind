@@ -40,6 +40,7 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-primary">Editar</a> |
+                        <a asp-controller="ItensCompras" asp-action="Index" asp-route-id="@item.CompraId" class="text-info text-decoration-none btn btn-outline-info">Produtos</a> |
                         <a asp-action="Delete" asp-route-id="@item.CompraId" class="text-decoration-none btn btn-outline-danger">Deletar</a>
                     </td>
                 </tr>
